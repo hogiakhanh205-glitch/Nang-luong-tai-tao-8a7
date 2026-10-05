@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Năng lượng tái tạo – Bài trình chiếu lớp 8</title>
+<style>
+:root{--bg:#f3f8ee;--ink:#1d2b22;--mut:#51635a;--card:#ffffff;--line:#cfe0c8;--sun:#b57d00;--leaf:#2f8f5b;--sky:#2b7fb8;--bad:#c4452f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13201a;--ink:#eaf3e6;--mut:#a9bdb0;--card:#1c2e25;--line:#33503f;--sun:#ffc633;--leaf:#5fd08f;--sky:#6bb8ea;--bad:#ff8a73}}
+:root[data-theme="dark"]{--bg:#13201a;--ink:#eaf3e6;--mut:#a9bdb0;--card:#1c2e25;--line:#33503f;--sun:#ffc633;--leaf:#5fd08f;--sky:#6bb8ea;--bad:#ff8a73}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro","Segoe UI",Roboto,Arial,sans-serif;line-height:1.5;overflow:hidden}
+.deck{height:100%;display:flex;flex-direction:column}
+.stage{flex:1;overflow-y:auto;padding:20px 20px 8px}
+.slide{display:none;max-width:760px;margin:0 auto}
+.slide.on{display:block}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.15;margin:0 0 12px}
+h2{font-size:clamp(22px,4.5vw,30px);margin:0 0 12px;color:var(--leaf)}
+p,li{font-size:clamp(15px,2.6vw,18px)}
+ul{padding-left:20px;margin:8px 0}
+li{margin:6px 0}
+.sub{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.cols{grid-template-columns:1fr}}
+.title{border-left:8px solid #f2a900;padding-left:14px;margin-top:3vh}
+.by{font-weight:600;color:var(--leaf);margin:2px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:15px}
+.art{display:flex;justify-content:center;margin:10px 0}
+.art svg{width:min(100%,420px);height:auto}
+.spin{transform-box:view-box;animation:spin 14s linear infinite}
+.rot{transform-box:view-box;animation:spin 5s linear infinite}
+.bob{animation:bob 3s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.spin,.rot,.bob{animation:none}}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-top:1px solid var(--line);background:var(--card)}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px 16px;min-height:44px}
+button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+button.go{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+.nav button:disabled{opacity:.4}
+.opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.opts button{flex:1;min-width:120px}
+.q{font-size:clamp(16px,3vw,20px);font-weight:600;margin:10px 0}
+.fb{min-height:48px;margin-top:8px;font-weight:600}
+.ok{color:var(--leaf)}.no{color:var(--bad)}
+.score{font-size:17px;color:var(--sun);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+th{background:var(--card)}
+.scroll{overflow-x:auto}
+.flow{stroke-dasharray:8 6;animation:flow 1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-14}}
+.bub{animation:bub 3s ease-in infinite}
+@keyframes bub{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-38px);opacity:0}}
+.steam{animation:steam 3.2s ease-out infinite}
+@keyframes steam{0%{transform:translateY(0) scale(.6);opacity:0}25%{opacity:.8}100%{transform:translateY(-34px) scale(1.4);opacity:0}}
+.glow{animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{50%{opacity:.45}}
+.flame{animation:flame .7s ease-in-out infinite alternate}
+@keyframes flame{to{transform:scaleY(1.18)}}
+@media(prefers-reduced-motion:reduce){.flow,.bub,.steam,.glow,.flame{animation:none}}
+</style>
+</head>
+<body>
+<div class="deck">
+<div class="stage" id="stage">
+
+<section class="slide on">
+ <div class="title">
+  <h1>Năng lượng tái tạo: nguồn điện của tương lai</h1>
+  <p class="sub">Bài trình chiếu môn Tin học</p>
+  <p class="by">Nhóm thực hiện:</p>
+  <p class="by">Hồ Gia Khánh – Lớp 8/7</p>
+  <p class="by">Nguyễn Thế Hưng – Lớp 8/7</p>
+ </div>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 200" id="art1"></svg></div>
+</section>
+
+<section class="slide">
+ <h2>Năng lượng tái tạo là gì?</h2>
+ <p>Năng lượng tái tạo là loại năng lượng lấy từ thiên nhiên và liên tục được bổ sung, nên con người có thể dùng lâu dài mà không lo cạn kiệt như than đá hay dầu mỏ.</p>
+ <div class="chips"><span class="chip">☀️ Mặt trời</span><span class="chip">🌬️ Gió</span><span class="chip">💧 Nước</span><span class="chip">🌿 Sinh khối</span><span class="chip">🌋 Địa nhiệt</span></div>
+ <div class="cols">
+  <div class="card"><b>Vì sao cần?</b><ul><li>Than, dầu, khí sẽ cạn dần sau nhiều năm khai thác</li><li>Đốt nhiên liệu hóa thạch thải khí nhà kính, làm Trái Đất nóng lên</li></ul></div>
+  <div class="card"><b>Lợi ích</b><ul><li>Nguồn điện sạch, ít gây ô nhiễm không khí và nước</li><li>Giúp đất nước bớt phụ thuộc vào nhiên liệu nhập khẩu</li></ul></div>
+ </div>
+ <p class="sub">Mỗi nguồn năng lượng sẽ có một trang riêng ở phía sau, và có mini game để bạn thử sức.</p>
+</section>
+
+<section class="slide" data-quiz="sun">
+ <h2>☀️ Năng lượng mặt trời</h2>
+ <p>Là năng lượng từ ánh sáng và nhiệt của Mặt Trời, được con người thu lại bằng tấm pin mặt trời để tạo ra điện hoặc đun nóng nước.</p>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 150" id="artSun"></svg></div>
+ <ul><li>Cách hoạt động: tấm pin hấp thụ ánh sáng rồi biến thành dòng điện.</li><li>Ưu điểm: sạch, không gây tiếng ồn, lắp được trên mái nhà.</li><li>Hạn chế: phụ thuộc thời tiết, ban đêm không có nắng.</li></ul>
+</section>
+
+<section class="slide" data-quiz="wind">
+ <h2>🌬️ Năng lượng gió</h2>
+ <p>Là năng lượng của không khí chuyển động. Gió thổi làm quay cánh của tuabin, rồi máy phát biến chuyển động đó thành điện.</p>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 170" id="artWind"></svg></div>
+ <ul><li>Ưu điểm: không cần nhiên liệu, không thải khói.</li><li>Hạn chế: cần nơi có gió đều, tuabin có thể gây tiếng ồn.</li><li>Ở nước ta: các tỉnh ven biển miền Trung và miền Nam có nhiều gió.</li></ul>
+</section>
+
+<section class="slide" data-quiz="water">
+ <h2>💧 Năng lượng nước (thủy điện)</h2>
+ <p>Nước từ hồ chứa trên cao chảy qua đập, làm quay tuabin và máy phát để tạo ra điện. Nhờ mưa mà hồ chứa được bổ sung nước liên tục.</p>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 170" id="artWater"></svg></div>
+ <ul><li>Ưu điểm: nguồn điện ổn định, lâu đời và có thể điều tiết nước chống hạn, chống lũ.</li><li>Hạn chế: xây đập có thể làm thay đổi dòng sông và môi trường xung quanh.</li><li>Ví dụ ở nước ta: nhà máy thủy điện Hòa Bình trên sông Đà.</li></ul>
+</section>
+
+<section class="slide" data-quiz="bio">
+ <h2>🌿 Năng lượng sinh khối</h2>
+ <p>Sinh khối là các chất hữu cơ từ thực vật và chất thải như rơm rạ, trấu, gỗ vụn, bã mía. Người ta đốt hoặc ủ chúng để lấy nhiệt, khí sinh học hay điện.</p>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 170" id="artBio"></svg></div>
+ <ul><li>Ưu điểm: tận dụng được phế phẩm nông nghiệp, giảm rác thải.</li><li>Hạn chế: nếu đốt không đúng cách vẫn có thể gây khói bụi.</li><li>Ví dụ: hầm biogas ở các hộ chăn nuôi để lấy khí nấu ăn.</li></ul>
+</section>
+
+<section class="slide" data-quiz="geo">
+ <h2>🌋 Năng lượng địa nhiệt</h2>
+ <p>Là nhiệt có sẵn sâu trong lòng đất. Hơi nước nóng từ dưới đất được dẫn lên để quay tuabin phát điện hoặc để sưởi ấm.</p>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 170" id="artGeo"></svg></div>
+ <ul><li>Ưu điểm: hoạt động cả ngày lẫn đêm, ít phụ thuộc thời tiết.</li><li>Hạn chế: chỉ phù hợp ở nơi có nguồn nhiệt gần mặt đất như vùng núi lửa.</li><li>Ví dụ: Iceland dùng địa nhiệt để sưởi ấm và phát điện.</li></ul>
+</section>
+
+<section class="slide">
+ <h2>Việt Nam và kết luận</h2>
+ <div class="art" aria-hidden="true"><svg viewBox="0 0 420 170" id="artEnd"></svg></div>
+ <ul><li>Nước ta có nhiều nắng và gió, nhất là ở miền Trung và Nam Bộ, nên rất phù hợp để phát triển điện mặt trời và điện gió.</li><li>Thủy điện là nguồn điện tái tạo đã được sử dụng lâu đời ở nước ta.</li><li>Em có thể góp sức bằng cách tiết kiệm điện, tắt thiết bị khi không dùng và chia sẻ thông tin đúng.</li></ul>
+ <div class="card"><b>Thông điệp:</b> Tìm thông tin đúng, xử lí cẩn thận, rồi chia sẻ để cả lớp cùng hiểu về năng lượng sạch. Cảm ơn các bạn đã lắng nghe!</div>
+</section>
+
+<section class="slide" data-quiz="g1" data-lab="Tái tạo|Không tái tạo" data-intro="Chơi để lấy điểm nhé!">
+ <h2>Mini game 1: Tái tạo hay không?</h2>
+</section>
+
+<section class="slide" data-quiz="g2" data-lab="Đáng tin|Cần kiểm chứng" data-intro="Chơi để lấy điểm nhé!">
+ <h2>Mini game 2: Tin hay cần kiểm chứng?</h2>
+</section>
+
+</div>
+<div class="nav">
+ <button id="prev" onclick="go(-1)">Trước</button>
+ <span><span id="pos" class="sub"></span> <button id="snd" onclick="toggleSnd()" aria-pressed="true">🔊 Âm thanh: bật</button></span>
+ <button id="next" class="go" onclick="go(1)">Tiếp</button>
+</div>
+</div>
+<script>
+/* hình minh họa: cánh quạt xoay quanh đúng trục (x,y) gắn liền với cột */
+function turbine(x,y,h,dur){
+ return '<rect x="'+(x-4)+'" y="'+y+'" width="8" height="'+h+'" rx="2" fill="#8fa89a"/>'+
+ '<g class="rot" style="transform-origin:'+x+'px '+y+'px;animation-duration:'+dur+'s">'+
+ '<path d="M'+x+' '+y+'l-5-46h10zM'+x+' '+y+'l40 23-3 7zM'+x+' '+y+'l-40 23 3 7z" fill="#2f8f5b"/></g>'+
+ '<circle cx="'+x+'" cy="'+y+'" r="6" fill="#1d6e43"/>';
+}
+function sunny(x,y,r){
+ var s='';for(var a=0;a<8;a++){var t=a*Math.PI/4;
+  s+='M'+(x+Math.cos(t)*(r+8)).toFixed(1)+' '+(y+Math.sin(t)*(r+8)).toFixed(1)+'L'+(x+Math.cos(t)*(r+20)).toFixed(1)+' '+(y+Math.sin(t)*(r+20)).toFixed(1);}
+ return '<g class="spin" style="transform-origin:'+x+'px '+y+'px"><circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#f2a900"/><path d="'+s+'" stroke="#f2a900" stroke-width="5" stroke-linecap="round"/></g>';
+}
+function panel(x,y){return '<g class="bob"><rect x="'+x+'" y="'+y+'" width="60" height="38" rx="3" fill="#2b4a7a"/><path d="M'+x+' '+(y+13)+'h60M'+x+' '+(y+25)+'h60M'+(x+20)+' '+y+'v38M'+(x+40)+' '+y+'v38" stroke="#6bb8ea" stroke-width="2"/></g>'}
+var sea='<path d="M0 175q60-30 120 0t120 0t120 0t60-10v35H0z" fill="#2b7fb8" opacity=".35"/>';
+document.getElementById('art1').innerHTML=sunny(90,70,26)+sea+turbine(287,78,97,5)+panel(330,120);
+document.getElementById('artSun').innerHTML=sunny(110,70,30)+panel(250,80)+'<rect x="0" y="125" width="420" height="25" fill="#2f8f5b" opacity=".4"/>';
+document.getElementById('artWind').innerHTML='<rect x="0" y="150" width="420" height="20" fill="#2f8f5b" opacity=".4"/>'+turbine(130,60,92,5)+turbine(280,80,72,7);
+document.getElementById('artEnd').innerHTML='<rect x="0" y="150" width="420" height="20" fill="#2f8f5b" opacity=".4"/>'+turbine(100,58,92,5)+turbine(210,78,72,7)+sunny(340,50,22);
+
+
+var ground='<rect x="0" y="150" width="420" height="20" fill="#2f8f5b" opacity=".4"/>';
+function bolt(x,y){return '<path class="bob" d="M'+x+' '+y+'l-12 22h10l-6 20 18-26h-11z" fill="#f2a900"/>'}
+var wave='<path class="bob" d="M0 62q18-8 37 0t37 0t38 0v8H0z" fill="#6bb8ea" opacity=".8"/>';
+document.getElementById('artWater').innerHTML=
+ '<rect x="0" y="64" width="150" height="86" fill="#2b7fb8" opacity=".6"/>'+wave+
+ '<path d="M150 50h46l10 100h-66z" fill="#8fa89a"/>'+
+ '<path d="M150 122H215" stroke="#51635a" stroke-width="10"/><path d="M150 122H215" class="flow" stroke="#6bb8ea" stroke-width="4" fill="none"/>'+
+ '<rect x="215" y="96" width="62" height="54" rx="4" fill="#2b4a7a"/>'+
+ '<g class="rot" style="transform-origin:246px 123px;animation-duration:3s"><circle cx="246" cy="123" r="17" fill="none" stroke="#eaf3e6" stroke-width="3"/><path d="M246 106v34M229 123h34M234 111l24 24M258 111l-24 24" stroke="#eaf3e6" stroke-width="3"/></g>'+
+ '<rect x="277" y="136" width="143" height="14" fill="#2b7fb8" opacity=".6"/><path d="M277 143H420" class="flow" stroke="#6bb8ea" stroke-width="3" fill="none"/>'+
+ bolt(246,36)+ground;
+function bubbles(){var o='';[[185,128,0],[210,132,1],[232,126,2],[198,120,1.6],[222,134,.6]].forEach(function(b){o+='<circle class="bub" cx="'+b[0]+'" cy="'+b[1]+'" r="4" fill="#cfe9d6" style="animation-delay:'+b[2]+'s"/>'});return o}
+document.getElementById('artBio').innerHTML=
+ '<g class="bob"><rect x="18" y="116" width="62" height="34" rx="4" fill="#d9a441"/><path d="M18 128h62M18 139h62M40 116v34M60 116v34" stroke="#b07f1f" stroke-width="2"/></g>'+
+ '<path d="M110 150v-34M110 134c-14-4-18-14-16-22 10 2 16 10 16 22zM110 128c12-2 18-10 18-18-10 0-17 6-18 18z" stroke="#2f8f5b" stroke-width="3" fill="#2f8f5b"/>'+
+ '<path d="M150 150v-50a60 60 0 0 1 120 0v50z" fill="#8fa89a"/><rect x="164" y="104" width="92" height="40" rx="8" fill="#2b4a7a"/>'+bubbles()+
+ '<path d="M210 40V26H380V144H368" stroke="#51635a" stroke-width="6" fill="none"/><rect x="316" y="138" width="52" height="12" rx="3" fill="#51635a"/>'+
+ '<g class="flame" style="transform-origin:342px 138px"><path d="M342 102c-13 15-15 24-6 34 4 4 14 4 18 0 8-10 4-21-12-34z" fill="#f26a1b"/><path d="M342 118c-5 6-6 11-2 15 3 3 8 3 10 0 3-4 1-9-8-15z" fill="#f2c200"/></g>'+ground;
+function puff(x,y,d){return '<circle class="steam" cx="'+x+'" cy="'+y+'" r="9" fill="#eaf3e6" style="animation-delay:'+d+'s"/>'}
+document.getElementById('artGeo').innerHTML=
+ '<rect x="0" y="92" width="420" height="78" fill="#8a6a4a" opacity=".55"/><rect x="0" y="88" width="420" height="6" fill="#2f8f5b" opacity=".6"/>'+
+ '<ellipse class="glow" cx="170" cy="168" rx="150" ry="22" fill="#e8501b"/>'+
+ '<path d="M150 152V92" stroke="#51635a" stroke-width="9"/><path d="M150 152V92" class="flow" stroke="#ff9d5c" stroke-width="3" fill="none"/>'+
+ '<rect x="118" y="58" width="104" height="30" rx="4" fill="#2b4a7a"/>'+
+ '<g class="rot" style="transform-origin:150px 73px;animation-duration:3s"><circle cx="150" cy="73" r="11" fill="none" stroke="#eaf3e6" stroke-width="2.5"/><path d="M150 62v22M139 73h22" stroke="#eaf3e6" stroke-width="2.5"/></g>'+
+ '<path d="M185 58l4-26h14l4 26z" fill="#8fa89a"/>'+puff(196,30,0)+puff(200,26,1.5)+
+ '<ellipse cx="330" cy="92" rx="48" ry="9" fill="#6bb8ea" opacity=".85"/>'+puff(318,84,.4)+puff(334,84,1.4)+puff(346,84,2.4)+
+ '<g stroke="#51635a" stroke-width="3"><path d="M250 88V50M240 58h20M243 68h14"/></g>'+bolt(256,12)+ground.replace('150','88').replace('opacity=".4"','opacity="0"');
+
+var slides=document.querySelectorAll('.slide'),cur=0;
+function render(){
+ slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+ document.getElementById('pos').textContent=(cur+1)+'/'+slides.length;
+ document.getElementById('prev').disabled=cur===0;
+ document.getElementById('next').disabled=cur===slides.length-1;
+ document.getElementById('stage').scrollTop=0;
+}
+function go(d){cur=Math.max(0,Math.min(slides.length-1,cur+d));render()}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+
+var snd=true,ac=null;
+function toggleSnd(){snd=!snd;var b=document.getElementById('snd');b.textContent=snd?'🔊 Âm thanh: bật':'🔇 Âm thanh: tắt';b.setAttribute('aria-pressed',snd)}
+function beep(f,t,d,type,vol){
+ var o=ac.createOscillator(),g=ac.createGain();
+ o.type=type;o.frequency.value=f;
+ g.gain.setValueAtTime(vol,ac.currentTime+t);
+ g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+t+d);
+ o.connect(g);g.connect(ac.destination);
+ o.start(ac.currentTime+t);o.stop(ac.currentTime+t+d+0.02);
+}
+function sound(ok){
+ if(!snd)return;
+ try{
+  if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();
+  if(ac.state==='suspended')ac.resume();
+  if(ok){beep(1200,0,0.12,'sine',0.25);beep(1700,0.1,0.18,'sine',0.25)}
+  else{beep(180,0,0.28,'sawtooth',0.2);beep(180,0.36,0.28,'sawtooth',0.2)}
+ }catch(e){}
+}
+
+/* mini game: [câu, đúng?, giải thích] */
+var QZ={
+g1:[
+["Ánh nắng mặt trời chiếu xuống Trái Đất mỗi ngày và được tấm pin biến thành điện. Nguồn này có bao giờ cạn không?",true,"Mặt trời chiếu sáng hằng ngày nên là nguồn tái tạo."],
+["Than đá được hình thành dưới lòng đất qua hàng triệu năm, con người đào lên để đốt lấy nhiệt chạy nhà máy điện.",false,"Than đá hình thành quá chậm nên dùng hết là không có lại."],
+["Gió thổi quay các cánh quạt khổng lồ của tuabin ở vùng ven biển để tạo ra điện, và gió thì ngày nào cũng có.",true,"Gió luôn được tạo ra tự nhiên nên là nguồn tái tạo."],
+["Dầu mỏ được khoan từ sâu dưới lòng đất hoặc ngoài biển, rồi tinh chế thành xăng, dầu cho xe và nhà máy.",false,"Dầu mỏ là nhiên liệu hóa thạch, không tái tạo kịp."],
+["Nước từ hồ chứa chảy qua đập làm quay tuabin phát điện, nhờ mưa mà hồ chứa lại đầy lên theo mùa.",true,"Chu trình mưa bổ sung nước liên tục nên thủy điện là tái tạo."],
+["Khí đốt tự nhiên được khai thác từ các mỏ dưới biển, rồi dẫn qua đường ống tới nhà máy để đốt lấy điện.",false,"Khí đốt là nhiên liệu hóa thạch nên không tái tạo."]],
+g2:[
+["Bài viết trên trang của Bộ Công Thương, có ghi rõ ngày đăng, tên cơ quan và số liệu kèm nguồn tham khảo ở cuối bài.",true,"Có cơ quan chịu trách nhiệm, ngày đăng và dẫn nguồn."],
+["Một bài chia sẻ trên mạng xã hội viết rằng điện gió làm hỏng thời tiết cả nước, nhưng không có tên tác giả và không dẫn chứng.",false,"Không tác giả, không dẫn chứng nên cần kiểm chứng."],
+["Sách giáo khoa của nhà xuất bản giáo dục nói năng lượng mặt trời là nguồn tái tạo, kèm giải thích và hình minh họa.",true,"Sách giáo khoa được biên soạn và thẩm định cẩn thận."],
+["Một tin nhắn chuyền tay nói pin mặt trời sẽ hết sạch năng lượng sau đúng 1 năm, không ghi ai nói và nói dựa trên đâu.",false,"Tin chuyền tay không nguồn, nên tìm thêm nguồn khác để so sánh."],
+["Một báo điện tử chính thống đưa tin về dự án điện gió mới, có tên phóng viên, ngày đăng và trích lời của đại diện chủ đầu tư.",true,"Báo chính thống có tác giả, thời gian và người phát biểu rõ ràng."]],
+sun:[
+["Pin mặt trời biến ánh sáng mặt trời thành điện, và ban ngày nắng càng mạnh thì tấm pin thường càng tạo ra nhiều điện.",true,"Ánh sáng càng mạnh thì điện tạo ra càng nhiều."],
+["Điện mặt trời chỉ hoạt động được vào ban đêm vì lúc đó trời tối và mát hơn so với ban ngày.",false,"Pin cần ánh sáng nên hoạt động chủ yếu ban ngày."]],
+wind:[
+["Gió thổi làm quay cánh tuabin, rồi chuyển động quay đó làm máy phát tạo ra điện cho chúng ta dùng.",true,"Gió làm quay cánh, máy phát biến chuyển động thành điện."],
+["Tuabin gió thải ra rất nhiều khói đen giống như nhà máy nhiệt điện than khi đang hoạt động.",false,"Tuabin gió không đốt nhiên liệu nên không thải khói."]],
+water:[
+["Nước chảy từ trên cao xuống làm quay tuabin ở đập thủy điện, nhờ đó máy phát tạo ra điện.",true,"Sức nước làm quay tuabin phát điện."],
+["Thủy điện cần đốt than đá liên tục để làm nước chảy qua đập và quay tuabin.",false,"Thủy điện dùng sức nước, không cần đốt than."]],
+bio:[
+["Rơm rạ, trấu và gỗ vụn có thể được đốt hoặc ủ để lấy nhiệt, khí sinh học hay điện, nên được gọi là sinh khối.",true,"Đó là các chất hữu cơ từ thực vật, gọi là sinh khối."],
+["Sinh khối là các loại dầu mỏ được khoan lên từ sâu dưới lòng đất hoặc dưới đáy biển.",false,"Dầu mỏ là nhiên liệu hóa thạch, không phải sinh khối."]],
+geo:[
+["Năng lượng địa nhiệt dùng nhiệt từ sâu trong lòng đất, ví dụ hơi nước nóng, để quay tuabin phát điện hoặc để sưởi ấm.",true,"Nhiệt trong lòng đất là nguồn của địa nhiệt."],
+["Năng lượng địa nhiệt lấy từ gió thổi qua sa mạc nên chỉ có ở những nơi rất khô và nóng.",false,"Địa nhiệt lấy từ nhiệt trong lòng đất, không phải từ gió."]]
+};
+document.querySelectorAll('[data-quiz]').forEach(function(sl){
+ var lb=(sl.dataset.lab||'Đúng|Sai').split('|'),d=QZ[sl.dataset.quiz],i=0,sc=0,busy=false,box=document.createElement('div');
+ box.className='card';
+ box.innerHTML='<b>🎮 '+(sl.dataset.intro||'Mini game: đến lượt bạn chơi nhé!')+'</b><div class="sub">Đọc câu bên dưới rồi chọn '+lb[0]+' hoặc '+lb[1]+'.</div><div class="score"></div><div class="q"></div><div class="opts"><button class="go">'+lb[0]+'</button><button>'+lb[1]+'</button></div><div class="fb" aria-live="polite"></div><button class="re" style="display:none">Chơi lại</button>';
+ sl.appendChild(box);
+ var S=box.querySelector('.score'),Q=box.querySelector('.q'),F=box.querySelector('.fb'),R=box.querySelector('.re'),B=box.querySelectorAll('.opts button');
+ function show(){F.textContent='';R.style.display='none';busy=false;
+  S.textContent='Điểm: '+sc+' / '+d.length;
+  Q.textContent=i<d.length?d[i][0]:'Hoàn thành! Bạn được '+sc+'/'+d.length+' điểm.';
+  if(i>=d.length)R.style.display='inline-block'}
+ function pick(v){
+  if(busy||i>=d.length)return;busy=true;
+  var ok=d[i][1]===v;if(ok)sc++;sound(ok);
+  F.className='fb '+(ok?'ok':'no');
+  F.textContent=(ok?'Đúng rồi! ':'Chưa đúng. ')+d[i][2];
+  i++;setTimeout(show,2300);
+ }
+ B[0].onclick=function(){pick(true)};B[1].onclick=function(){pick(false)};
+ R.onclick=function(){i=0;sc=0;show()};
+ show();
+});
+render();
+</script>
+</body>
+</html>
